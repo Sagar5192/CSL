@@ -1,0 +1,31 @@
+import android.os.Bundle
+import android.os.CountDownTimer
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity: AppCompatActivity() {
+private val timer = MyCounter(10000000000,1000)
+var countervalue: Int=0
+
+override fun onCreate(savedInstanceState:Bundle?){
+super.onCreate(savedInstanceState)
+setContentView(R.layout.activity_main)
+startbtn.setOnClickListener{
+timer.start()
+startbtn.isEnabled=false}
+
+stopbtn.setOnClickListener{
+timer.cancel()
+startbtn.isEnabled=true
+}
+
+
+inner class MyCounter(millisInFuture:Long,countDownInterval:Long): CountDownTimer(millisInFuture,countdowninterval){
+override fun onFinish(){
+}
+override fun onTick(millisUntilFinished: Long){
+countervalue++
+timertext.text=(countervalue).toString()
+}
+}
+}
